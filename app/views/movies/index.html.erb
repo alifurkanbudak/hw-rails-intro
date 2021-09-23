@@ -7,10 +7,10 @@
   <thead>
     <tr>
       <th>
-        <%= link_to "Movie Title", root_path(sort: "title"), id: "title_header", :class: @title_class %>
+        <%= link_to "Movie Title", root_path(sort: "title"), id: "title_header", :class: "bg-warning" %>
       </th>
       <th>Rating</th>
-      <%= link_to "Release Date", root_path(sort: "date"), id: "release_date_header", :class: @date_class %>
+      <%= link_to "Release Date", root_path(sort: "date"), id: "release_date_header", :class: "bg-success" %>
       <th>More Info</th>
     </tr>
   </thead>
