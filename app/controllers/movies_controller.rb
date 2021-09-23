@@ -7,11 +7,21 @@ class MoviesController < ApplicationController
     end
   
     def index
-      # flash[:notice] = params
+      
       
       @all_ratings = Movie.all_ratings
-      @selected_ratings = params[:ratings].blank? ? Movie.all_ratings.to_h { |r| [r, true] } : params[:ratings].map { |r, v| [r, v == "1"] }.to_h
-      # @selected_ratings = {:G => "1"}
+      if params[:ratings].blank?
+        @selected_ratings = Movie.all_ratings.to_h { |r| [r, true] }
+      else
+        @selected_ratings = Movie.all_ratings.to_h { |r| [r, true] }
+        
+        params[:ratings].each do |rating, value|
+          @selected_ratings[rating] = value == "1"
+        end
+      end
+      
+      flash[:notice] = @selected_ratings
+      
       
       if params['sort'] == 'title'
         @title_class = "hilite bg-warning"
