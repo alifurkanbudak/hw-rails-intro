@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
     end
   
     def index
+      @date_class = ""
+      @title_class = ""
       
       if params["sort"] == "title"
         flash[:notice] = "Sorting by title"
