@@ -7,7 +7,10 @@ class MoviesController < ApplicationController
     end
   
     def index
+      flash[:notice] = params
+      
       @all_ratings = Movie.all_ratings
+      @selected_ratings = {}
       
       if params['sort'] == 'title'
         @title_class = "hilite bg-warning"
