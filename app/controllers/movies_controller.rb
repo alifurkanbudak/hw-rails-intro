@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
     end
   
     def index
+      @all_ratings = Movie.all_ratings
+      
       if params['sort'] == 'title'
         @title_class = "hilite bg-warning"
         @movies = Movie.order(:title)
