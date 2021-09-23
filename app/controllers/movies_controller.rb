@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
       if params[:ratings].blank?
         @selected_ratings = Movie.all_ratings.to_h { |r| [r, true] }
       else
-        @selected_ratings = Movie.all_ratings.to_h { |r| [r, true] }
+        @selected_ratings = Movie.all_ratings.to_h { |r| [r, false] }
         
         params[:ratings].each do |rating, value|
           @selected_ratings[rating] = value == "1"
