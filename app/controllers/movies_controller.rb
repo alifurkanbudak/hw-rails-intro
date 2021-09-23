@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
       # flash[:notice] = params
       
       @all_ratings = Movie.all_ratings
-      @selected_ratings = params[ratings].blank? ? Movie.all_ratings.to_h { |r| [r, "1"] } : params[:ratings]
+      @selected_ratings = params[:ratings].blank? ? Movie.all_ratings.to_h { |r| [r, "1"] } : params[:ratings]
       # @selected_ratings = {:G => "1"}
       
       if params['sort'] == 'title'
