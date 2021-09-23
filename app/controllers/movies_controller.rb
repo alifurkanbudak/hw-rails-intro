@@ -12,12 +12,12 @@ class MoviesController < ApplicationController
       
       if params["sort"] == "title"
         flash[:notice] = "Sorting by title"
-        @movies = Movie.all.sort_by {|movie| movie.title}
         @title_class = "hilite bg-warning"
+        @movies = Movie.all.sort_by {|movie| movie.title}
       else
         flash[:notice] = "Not sorting"
-        @movies = Movie.all
         @date_class = "hilite bg-warning"
+        @movies = Movie.all
       end
       
     end
