@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
     end
   
     def index
+      puts params
+      puts Movie.all_ratings
       flash[:notice] = params
       
       @all_ratings = Movie.all_ratings
