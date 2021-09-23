@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   
     def index
       @movies = Movie.all
-      puts params
+       flash[:notice] = params
     end
   
     def new
