@@ -7,8 +7,14 @@ class MoviesController < ApplicationController
     end
   
     def index
-      @movies = Movie.all
-       flash[:notice] = params
+      flash[:notice] = params
+      
+      if params[:sort] == :title
+        @movies = Movie.all.sort_by {|movie| movie.title}
+      else
+        @movies = Movie.all
+      end
+      
     end
   
     def new
