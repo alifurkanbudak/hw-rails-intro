@@ -10,15 +10,7 @@ class MoviesController < ApplicationController
       
       
       @all_ratings = Movie.all_ratings
-      if params[:ratings].blank?
-        @selected_ratings = Movie.all_ratings.to_h { |r| [r, true] }
-      else
-        @selected_ratings = Movie.all_ratings.to_h { |r| [r, false] }
-        
-        params[:ratings].each do |rating, value|
-          @selected_ratings[rating] = value == "1"
-        end
-      end
+      @selected_ratings = selected_ratings
       
       flash[:notice] = @selected_ratings
       
@@ -68,4 +60,19 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
+    
+    private
+    def selected_ratings
+      if params[:ratings].blank?
+       return Movie.all_ratings.to_h { |r| [r, true] }
+      else
+        res = Movie.all_ratings.to_h { |r| [r, false] }
+        
+        params[:ratings].each do |rating, value|
+          res[rating] = value == "1"
+        end
+        
+        return res
+      end
+    end 
   end
