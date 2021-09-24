@@ -7,22 +7,28 @@ class MoviesController < ApplicationController
     end
   
     def index
+      if (params['sort'].nil? && !session['sort'].nil?) || (params['ratings'].nil? && !session['ratings'].nil?)
+        redirect_to movies_path(
+          sort: params['sort'].nil? ? session['sort'] : params['sort'],
+          ratings: params['ratings'].nil? ? session['ratings'] : params['ratings'],
+        )
+        return
+      end
       
+      session['sort'] = params['sort']
+      session['ratings'] = params['ratings']
+      
+      flash['notice'] = "Session: #{session}, Params: #{params}"
       
       @all_ratings = Movie.all_ratings
-      
       @selected_ratings = params[:ratings].nil? ? Movie.all_ratings : params[:ratings].keys
-      flash[:notice] = @selected_ratings
-      
       @movies = Movie.with_ratings(@selected_ratings)
       
       if params['sort'] == 'title'
         @title_class = "hilite bg-warning"
-        logger.debug("Ordering by title")
         @movies = @movies.order(:title)
       elsif params['sort'] == 'date'
         @date_class = "hilite bg-warning"
-        logger.debug("Ordering by release_date")
         @movies = @movies.order(:release_date)
       end
     end
@@ -61,4 +67,4 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
-  end
+end

@@ -4,9 +4,6 @@ class Movie < ActiveRecord::Base
     end
     
     def Movie.with_ratings(ratings)
-        # return Movie.all
-        
-        # logger.debug("Movie.with_ratings #{ratings}")
         Movie.where('"rating"' +
                          " ILIKE ANY ( array[?] )", ratings)
     end
