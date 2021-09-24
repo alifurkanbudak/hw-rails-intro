@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
       
       @all_ratings = Movie.all_ratings
       
-      @selected_ratings = params[:ratings].blank? ? Movie.all_ratings : params[:ratings].keys
+      @selected_ratings = params[:ratings].nil? ? Movie.all_ratings : params[:ratings].keys
       flash[:notice] = @selected_ratings
       
       @movies = Movie.with_ratings(@selected_ratings)
