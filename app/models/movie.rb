@@ -7,6 +7,7 @@ class Movie < ActiveRecord::Base
         # return Movie.all
         
         # logger.debug("Movie.with_ratings #{ratings}")
-        Movie.where('"rating"' + " ILIKE ANY (?)", ratings)
+        Movie.where('"rating"' +
+                         " ILIKE ANY ( ? )", ratings)
     end
 end
