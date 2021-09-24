@@ -4,9 +4,9 @@ class Movie < ActiveRecord::Base
     end
     
     def Movie.with_ratings(ratings)
-        return Movie.all
+        # return Movie.all
         
         # logger.debug("Movie.with_ratings #{ratings}")
-        # Movie.where("upper(rating) in ?", ratings)
+        Movie.where(rating: ratings)
     end
 end
