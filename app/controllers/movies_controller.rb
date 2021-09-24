@@ -11,16 +11,18 @@ class MoviesController < ApplicationController
       
       @all_ratings = Movie.all_ratings
       
-      @selected_ratings = params[:ratings].blank? ? @all_ratings : params[:ratings].keys
+      @selected_ratings = params[:ratings].blank? ? Movie.all_ratings : params[:ratings].keys
       flash[:notice] = @selected_ratings
       
       @movies = Movie.with_ratings(@selected_ratings)
       
       if params['sort'] == 'title'
         @title_class = "hilite bg-warning"
+        logger.debug("Ordering by title")
         @movies = @movies.order(:title)
       elsif params['sort'] == 'date'
         @date_class = "hilite bg-warning"
+        logger.debug("Ordering by release_date")
         @movies = @movies.order(:release_date)
       end
     end
