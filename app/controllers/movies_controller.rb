@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
       @movies = Movie.with_ratings(@selected_ratings)
       
       
-      selected_header_class = "hilite bg-warning p-3"
+      selected_header_class = "hilite bg-warning"
       if params['sort'] == 'title'
         @title_class = selected_header_class
         @movies = @movies.order(:title)
