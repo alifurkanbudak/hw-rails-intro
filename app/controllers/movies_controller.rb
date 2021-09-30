@@ -24,11 +24,13 @@ class MoviesController < ApplicationController
       @selected_ratings = params[:ratings].nil? ? Movie.all_ratings : params[:ratings].keys
       @movies = Movie.with_ratings(@selected_ratings)
       
+      
+      selected_header_class = "hilite bg-warning p-3 mb-2"
       if params['sort'] == 'title'
-        @title_class = "hilite bg-warning"
+        @title_class = selected_header_class
         @movies = @movies.order(:title)
       elsif params['sort'] == 'date'
-        @date_class = "hilite bg-warning"
+        @date_class = selected_header_class
         @movies = @movies.order(:release_date)
       end
     end
