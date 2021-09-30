@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
   
     def index
       if (params['sort'].nil? && !session['sort'].nil?) || (params['ratings'].nil? && !session['ratings'].nil?)
+        flash.keep
+        
         redirect_to movies_path(
           sort: params['sort'].nil? ? session['sort'] : params['sort'],
           ratings: params['ratings'].nil? ? session['ratings'] : params['ratings'],
@@ -17,8 +19,6 @@ class MoviesController < ApplicationController
       
       session['sort'] = params['sort']
       session['ratings'] = params['ratings']
-      
-      flash['notice'] = "Session: #{session}, Params: #{params}"
       
       @all_ratings = Movie.all_ratings
       @selected_ratings = params[:ratings].nil? ? Movie.all_ratings : params[:ratings].keys
